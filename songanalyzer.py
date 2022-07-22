@@ -67,7 +67,7 @@ class Solution:
             rhyme_counte += rhyme_amount[k]
         final_string = ""
         for i in range(len(alit)):
-            final_string = final_string + "{letter}={number}, ". format(letter= alit[1],number=letter_count[1])
+            final_string = final_string + "{letter}={number}, ". format(letter= alit[l],number=letter_count[l])
         return final_string + "{rhymes} rhyming words". format(rhymes=rhyme_counte)
 
 
