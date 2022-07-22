@@ -37,38 +37,62 @@ class Solution:
         # return: string 
         
         # TODO: Write code below to return a string with the solution to the prompt
+        # wordArr = lyric.split(" ")
+        # wordArr[-1] = wordArr[-1].strip()
+        # word = [0]*256
+        # for item in wordArr:
+        #     word[ord(item[0])] += 1
+        # res = ""
+        # for i in range(len(word)):
+        #     if word[i]>1:
+        #         res += chr(i) + "=" + str(word[i]) + ","
+        # print(wordArr)
+        # cnt = 0
+        # flag = [False] * len(wordArr)
+        # for i in range(len(wordArr)):
+        #     for j in range(i+1, len(wordArr)):
+        #         if len(wordArr[i])>=3 and len(wordArr[j])>=3 and flag[i]:
+        #             if wordArr[i][-3:] == wordArr[j][-3:]:
+        #                 cnt += 1
+        #                 flag[i] = True
+        
+        # return res + " " + str(cnt) + " rhyming words"
         words = lyric.split(" ")
-        first = []
-        alit = []
+        first_letters = []
+        alit_letters = []
         letter_count = []
         word_endings = []
         filtered_endings = []
         rhyme_amount = []
-        rhyme_counte = 0
-        for i in range (len(words)):
-            if(words[i][0] in first):
-                if(words[i][0] in alit):
-                    letter_count[alit.index(words[i][0])]+=1
+        rhyme_count = 0
+        for i in range(len(words)):
+            if words[i][0] in first_letters:
+                if words[i][0] in alit_letters:
+                    letter_count[alit_letters.index(words[i][0])] += 1
                 else:
-                    alit.append(words[i][0])
+                    alit_letters.append(words[i][0])
                     letter_count.append(2)
             else:
-                first.append(words[i][0])
+                first_letters.append(words[i][0])
+
         for j in range(len(words)):
-            if (words[j][-3:] in word_endings):
-                if(words[j][-3:] in filtered_endings):
-                    rhyme_amount[filtered_endings.index(words[j][-3:])]+=1
+            if words[j][-3:] in word_endings:
+                if words[j][-3:] in filtered_endings:
+                    rhyme_amount[filtered_endings.index(words[j][-3:])] += 1
                 else:
                     filtered_endings.append(words[j][-3:])
                     rhyme_amount.append(2)
             else:
                 word_endings.append(words[j][-3:])
-        for k in range (len(rhyme_amount)):
-            rhyme_counte += rhyme_amount[k]
-        final_string = ""
-        for i in range(len(alit)):
-            final_string = final_string + "{letter}={number}, ". format(letter= alit[1],number=letter_count[1])
-        return final_string + "{rhymes} rhyming words". format(rhymes=rhyme_counte)
+        
+        for k in range(len(rhyme_amount)):
+            rhyme_count += rhyme_amount[k]
+
+        res = ""
+        for l in range(len(alit_letters)):
+            res += "{letter}={number}, ".format(letter = alit_letters[l], number=letter_count[l])
+        return res + "{rhymes} rhyming words".format(rhymes = rhyme_count)
+
 
 
         # list = lyric.split()
